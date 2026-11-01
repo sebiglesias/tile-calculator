@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tile Calculator & Grout Estimator | Square Feet & Box Calculator</title>
+  <meta name="description" content="Calculate how many boxes of tile you need for floors, bathrooms, or backsplashes. Includes waste factor (10% to 15%), thin-set mortar bags, and grout bags.">
+  <meta name="keywords" content="tile calculator square feet, how many boxes of tile do i need, tile and grout calculator, subway tile calculator, floor tile estimator">
+  <link rel="canonical" href="https://sebiglesias.com.ar/tile-calculator/">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0F172A">
+  <link rel="apple-touch-icon" href="icon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tile Calculator & Grout Estimator">
+  <meta property="og:description" content="Calculate exact tile square footage, boxes to buy, mortar, and grout.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sebiglesias.com.ar/tile-calculator/">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tile & Grout Calculator">
+  <meta name="twitter:description" content="Calculate tile boxes, thin-set mortar, and grout bags for floor or wall tile.">
+
+  <!-- Google tag (gtag.js) GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BNDBQP0W7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2BNDBQP0W7');
+  </script>
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-3381238987477190">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3381238987477190" crossorigin="anonymous"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Tile & Grout Square Footage Calculator",
+        "url": "https://sebiglesias.com.ar/tile-calculator/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "description": "Calculates tile boxes, square footage with waste percentage, thin-set mortar bags, and sanded/unsanded grout bags for flooring and walls.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much extra tile should I buy for waste?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tile industry guidelines recommend buying an extra 10% for standard straight grid layouts. For diagonal, herringbone, or chevron patterns—or rooms with many cutouts and corners—increase the waste factor to 15%."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many square feet does a 50 lb bag of thin-set mortar cover?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A standard 50 lb bag of modified thin-set mortar covers approximately 40 to 50 square feet when using a 1/2-inch notched trowel for large-format tiles, or 60 to 75 square feet using a 1/4-inch trowel for small mosaic or subway tiles."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="backlink-bar">
+      <a href="https://sebiglesias.com.ar" class="backlink">← sebiglesias.com.ar</a>
+    </div>
+
+    <header class="header">
+      <div class="header-badge">📐 Flooring & Tile Renovation Utility</div>
+      <h1>Tile Calculator<span class="accent">.</span></h1>
+      <p class="sub">Calculate square footage, boxes of tile, mortar & grout</p>
+    </header>
+
+    <!-- Big Results Display -->
+    <section class="card hero-card">
+      <div class="hero-top">
+        <div class="hero-col">
+          <span class="hero-sublabel">Total Area (With Waste)</span>
+          <div class="hero-val-wrap">
+            <span class="hero-number" id="metricTotalArea">132</span>
+            <span class="hero-unit">sq ft</span>
+          </div>
+          <span class="hero-detail" id="metricNetArea">Net room: 120 sq ft · 10% buffer</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-col highlight">
+          <span class="hero-sublabel">Boxes of Tile to Buy</span>
+          <div class="hero-val-wrap">
+            <span class="hero-number" id="metricBoxes">9</span>
+            <span class="hero-unit">boxes</span>
+          </div>
+          <span class="hero-detail" id="metricTilePieces">~66 individual 12"x24" tiles</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inputs Grid -->
+    <div class="inputs-grid">
+      <!-- Dimensions Card -->
+      <section class="card">
+        <h2>1. Room / Wall Dimensions (Feet)</h2>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="inputLength">Length (Feet)</label>
+            <input type="number" id="inputLength" value="12" min="1" step="0.5">
+          </div>
+          <div class="field-group">
+            <label for="inputWidth">Width / Height (Feet)</label>
+            <input type="number" id="inputWidth" value="10" min="1" step="0.5">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="inputDeductions">Un-tiled Area / Obstacles (Sq Ft)</label>
+          <input type="number" id="inputDeductions" value="0" min="0" step="1">
+          <span class="hint">Bathtub, vanity, or fireplace deduction</span>
+        </div>
+      </section>
+
+      <!-- Tile Specs Card -->
+      <section class="card">
+        <h2>2. Tile Size & Layout Pattern</h2>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="selectTilePreset">Tile Dimensions</label>
+            <select id="selectTilePreset">
+              <option value="12x24" selected>12" x 24" Large Format (2.0 sq ft)</option>
+              <option value="12x12">12" x 12" Square Tile (1.0 sq ft)</option>
+              <option value="3x6">3" x 6" Subway Tile (0.125 sq ft)</option>
+              <option value="6x24">6" x 24" Wood Plank (1.0 sq ft)</option>
+              <option value="24x24">24" x 24" XL Porcelain (4.0 sq ft)</option>
+              <option value="custom">Custom Dimensions...</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="inputBoxSqFt">Box Coverage (Sq Ft / Box)</label>
+            <input type="number" id="inputBoxSqFt" value="15.5" min="5" step="0.5">
+            <span class="hint">Printed on the box at Home Depot/Lowe's</span>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="selectPattern">Installation Pattern (Waste %)</label>
+            <select id="selectPattern">
+              <option value="0.10" selected>Standard Grid / Offset (10% waste)</option>
+              <option value="0.15">Herringbone / Diagonal (15% waste)</option>
+              <option value="0.20">Complex / Small mosaics (20% waste)</option>
+              <option value="0.05">No waste (Exact square footage)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="inputGroutJoint">Grout Joint Width</label>
+            <select id="inputGroutJoint">
+              <option value="0.125" selected>1/8 inch (Standard)</option>
+              <option value="0.0625">1/16 inch (Tight rectified tile)</option>
+              <option value="0.25">1/4 inch (Wide rustic / slate)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Complete Shopping List -->
+    <section class="card">
+      <h2>Complete Flooring Materials Checklist</h2>
+      <p class="section-desc">Quantities ready for checkout:</p>
+
+      <div class="materials-list" id="tileMaterialsList">
+        <!-- Injected via JS -->
+      </div>
+
+      <button type="button" class="btn-share" id="btnCopyTileMaterials" style="margin-top: 1.5rem;">
+        <span>📋</span> Copy Flooring Materials Checklist
+      </button>
+    </section>
+
+    <!-- AdSense Responsive Placement -->
+    <div class="adsense-wrap" style="text-align: center; margin: 2rem 0;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3381238987477190"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="card faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>Should I keep extra leftover tiles after installation?</h3>
+        <p>Always keep at least 1 full unopened box (or 10 to 15 loose tiles) in your garage or attic. Tile dye lots change constantly; if a pipe leaks or a tile cracks years from now, finding an exact color and texture match is nearly impossible.</p>
+      </div>
+      <div class="faq-item">
+        <h3>When should I use sanded vs unsanded grout?</h3>
+        <p>Use <strong>sanded grout</strong> for joints wider than 1/8 inch (the sand particles prevent cracking and shrinkage in wide gaps). Use <strong>unsanded grout</strong> for joints 1/8 inch or narrower, or on easily scratched surfaces like polished marble and glass tile.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Part of the <a href="https://sebiglesias.com.ar">sebiglesias.com.ar</a> utility tools suite.</p>
+      <p class="copy">Free flooring & tile utility · Imperial calculations</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

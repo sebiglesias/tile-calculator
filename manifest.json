@@ -1,0 +1,15 @@
+{
+  "name": "Tile Calculator",
+  "short_name": "TileCalc",
+  "start_url": "/tile-calculator/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#0284c7",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

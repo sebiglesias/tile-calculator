@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+    <filter id="tileShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#78350F" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="128" fill="#F6F3EE"/>
+  <rect x="24" y="24" width="464" height="464" rx="104" fill="none" stroke="#C2410C" stroke-opacity="0.25" stroke-width="4"/>
+
+  <!-- 4 Porcellanato Tiles Grid -->
+  <g filter="url(#tileShadow)">
+    <rect x="88" y="88" width="152" height="152" rx="14" fill="#FFFFFF" stroke="#E5DFD5" stroke-width="6"/>
+    <rect x="272" y="88" width="152" height="152" rx="14" fill="#FBF9F5" stroke="#E5DFD5" stroke-width="6"/>
+    <rect x="88" y="272" width="152" height="152" rx="14" fill="#FBF9F5" stroke="#E5DFD5" stroke-width="6"/>
+    <rect x="272" y="272" width="152" height="152" rx="14" fill="#FFFFFF" stroke="#E5DFD5" stroke-width="6"/>
+  </g>
+
+  <!-- Leveling Cross Spacer (Cruceta de Nivelación Terracotta) -->
+  <circle cx="256" cy="256" r="32" fill="url(#terracottaGrad)"/>
+  <path d="M256 204 L256 308 M204 256 L308 256" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+</svg>
